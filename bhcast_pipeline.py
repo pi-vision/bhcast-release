@@ -192,6 +192,11 @@ class GRMHDInference:
 
         
         self.model.eval()
+        # The paper's rollouts used current-frame BatchNorm statistics with batch size one.
+        for layer in self.model.modules():
+            if isinstance(layer, nn.BatchNorm2d):
+                layer.train()
+                layer.track_running_stats = False
     
     def predict(self, frame: Union[np.ndarray, torch.Tensor], horizon: int = 100) -> np.ndarray:
         """

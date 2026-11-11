@@ -38,8 +38,14 @@ uv run jupyter lab
 
 ## Download Checkpoints
 
-- [XGBoost checkpoint](https://drive.google.com/file/d/1pd8dYdACCvBe84eCsMWd2HLX1GM1usnM/view?usp=sharing)
-- [Forecast model checkpoint](https://drive.google.com/file/d/1ixg4iolxifYOSSCu3LnkmmETt0mGkmPW/view?usp=sharing)
+- [Forecast model checkpoint (`model.pt`)](https://github.com/pi-vision/bhcast-release/releases/download/v1.0.1/model.pt) ([Google Drive mirror](https://drive.google.com/file/d/1pd8dYdACCvBe84eCsMWd2HLX1GM1usnM/view?usp=sharing))
+- [XGBoost checkpoint (`sgra_Ma_forecast.joblib`)](https://drive.google.com/file/d/1ixg4iolxifYOSSCu3LnkmmETt0mGkmPW/view?usp=sharing)
+
+Save the downloads in `checkpoints/`. The forecast checkpoint uses the original
+trained weights (SHA-256 `96449f1d1a6acc38b59e329196f2541447b67f40052de404a11322c9dd5bc46e`).
+Use `GRMHDInference.predict` to match the paper's single-image rollouts. Each
+BatchNorm layer computes per-channel statistics from the current frame's feature
+maps at each forecast step.
 
 ```bash
 export XGB_MODEL=/path/to/custom_model.joblib
